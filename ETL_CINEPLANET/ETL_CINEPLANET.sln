@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "ETL_CINEPLANET", "ETL_CINEPLANET\ETL_CINEPLANET.dtproj", "{8DAC66E8-8314-4D04-BCAD-4B0AFF6D3ACF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DAC66E8-8314-4D04-BCAD-4B0AFF6D3ACF}.Development|Default.ActiveCfg = Development
+		{8DAC66E8-8314-4D04-BCAD-4B0AFF6D3ACF}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {832E36EE-B3A9-440E-8E74-60B8FA685362}
+	EndGlobalSection
+EndGlobal
