@@ -11,8 +11,8 @@
   DTS:LocaleID="22538"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="36"
-  DTS:VersionGUID="{604A5500-B12A-479B-9B57-14D63557D2C5}">
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{052C74C9-54AD-4F98-AC78-4E9A387CE92C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -920,7 +920,7 @@ where [refTable].[nombre] = ?</property>
                       cachedLength="50"
                       cachedName="Provincia_unmapped"
                       externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[provincia]"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\110:invalid" />
+                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\90:invalid" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2260,11 +2260,552 @@ where [refTable].[nombre] = ?</property>
           version="1">
           <components>
             <component
-              refId="Package\LOAD DIM_TIEMPO\Tabla Clientes"
+              refId="Package\LOAD DIM_TIEMPO\Conversión de datos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[idtiempo]"
+                      cachedDataType="i4"
+                      cachedName="idtiempo"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[idtiempo]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[fecha]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="fecha"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[anyo]"
+                      cachedDataType="i4"
+                      cachedName="anyo"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[anyo]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[cmes]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="cmes"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[cmes]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[nmes]"
+                      cachedDataType="i4"
+                      cachedName="nmes"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nmes]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[nsemana]"
+                      cachedDataType="i4"
+                      cachedName="nsemana"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nsemana]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[dsemana]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="dsemana"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[dsemana]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[bimestre]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="bimestre"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[bimestre]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[trimestre]"
+                      cachedDataType="wstr"
+                      cachedLength="11"
+                      cachedName="trimestre"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[trimestre]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[semestre]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="semestre"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[semestre]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of idtiempo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of idtiempo]"
+                      name="Copy of idtiempo"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[idtiempo]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of fecha]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of fecha]"
+                      name="Copy of fecha"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[fecha]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of anyo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of anyo]"
+                      name="Copy of anyo"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[anyo]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of cmes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of cmes]"
+                      name="Copy of cmes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[cmes]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of nmes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of nmes]"
+                      name="Copy of nmes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nmes]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of nsemana]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of nsemana]"
+                      name="Copy of nsemana"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nsemana]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of dsemana]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="30"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of dsemana]"
+                      name="Copy of dsemana"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[dsemana]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of bimestre]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of bimestre]"
+                      name="Copy of bimestre"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[bimestre]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of trimestre]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of trimestre]"
+                      name="Copy of trimestre"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[trimestre]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of semestre]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of semestre]"
+                      name="Copy of semestre"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[semestre]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="TIME_DESTINO"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[dimtiempo]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DM_Cine.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DM_Cine.sa]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[idtiempo]"
+                      cachedDataType="i4"
+                      cachedName="idtiempo"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[idtiempo]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[idtiempo]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[fecha]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="fecha"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[fecha]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[anyo]"
+                      cachedDataType="i4"
+                      cachedName="anyo"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[anio]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[anyo]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[Copy of cmes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of cmes"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[cmes]"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of cmes]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[Copy of nmes]"
+                      cachedDataType="i4"
+                      cachedName="Copy of nmes"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[nmes]"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of nmes]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[Copy of dsemana]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Copy of dsemana"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[dsemana]"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of dsemana]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[Copy of bimestre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of bimestre"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[bimestre]"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of bimestre]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[Copy of trimestre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Copy of trimestre"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[trimestre]"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of trimestre]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[Copy of semestre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of semestre"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[semestre]"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of semestre]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].Columns[Copy of nsemana]"
+                      cachedDataType="i4"
+                      cachedName="Copy of nsemana"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[nsemana]"
+                      lineageId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of nsemana]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[idtiempo]"
+                      dataType="i4"
+                      name="idtiempo" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[fecha]"
+                      dataType="dbDate"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[anio]"
+                      dataType="i2"
+                      name="anio" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[cmes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="cmes" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[nmes]"
+                      dataType="ui1"
+                      name="nmes" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[nsemana]"
+                      dataType="i2"
+                      name="nsemana" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[dsemana]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="dsemana" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[bimestre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="bimestre" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[trimestre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB].ExternalColumns[semestre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="semestre" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN"
               componentClassID="Microsoft.ManagedComponentHost"
               contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
               description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
-              name="Tabla Clientes"
+              name="TIME_ORIGEN"
               usesDispositions="true"
               version="4">
               <properties>
@@ -2273,7 +2814,15 @@ where [refTable].[nombre] = ?</property>
                   description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select distinct year(Fecha)*10000+month(Fecha)*100+day(Fecha) as idtiempo, 
+convert(varchar(10),Fecha,103) as fecha, year(Fecha) as anyo, 
+datename(mm,Fecha) as cmes, month(Fecha) as nmes, 
+datepart(wk,Fecha) as nsemana, 
+DATENAME(dw,Fecha) as dsemana, 
+'Bimestre '+cast((month(Fecha)+1)/2 as varchar(1)) as bimestre, 
+'Trimestre '+cast(datepart(qq,Fecha) as varchar(1)) as trimestre, 
+'Semestre ' + cast((month(Fecha)-1)/6+1as varchar(1)) as semestre
+from T_Venta</property>
                 <property
                   dataType="System.Int32"
                   description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
@@ -2292,14 +2841,14 @@ where [refTable].[nombre] = ?</property>
                   dataType="System.Int32"
                   description="Especificar el modo de recuperar información de columnas externas"
                   name="AccessMode"
-                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
                 <property
                   dataType="System.String"
                   name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Connections[IDbConnection]"
+                  refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Connections[IDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LocalHost.GestionCine.sa]"
                   connectionManagerRefId="Package.ConnectionManagers[LocalHost.GestionCine.sa]"
                   description="Administrador de conexiones administrado"
@@ -2307,350 +2856,227 @@ where [refTable].[nombre] = ?</property>
               </connections>
               <outputs>
                 <output
-                  refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET]"
+                  refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET]"
                   name="Salida de origen de ADO NET">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[idCliente]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[idtiempo]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[idCliente]"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[idCliente]"
-                      name="idCliente"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[idtiempo]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[idtiempo]"
+                      name="idtiempo"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Contraseña]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[fecha]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Contraseña]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Contraseña]"
-                      name="Contraseña"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[fecha]"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[fecha]"
+                      name="fecha"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Nombres]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Nombres]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Nombres]"
-                      name="Nombres"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[ApellidoPaterno]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[ApellidoPaterno]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[ApellidoPaterno]"
-                      name="ApellidoPaterno"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[ApellidoMaterno]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[ApellidoMaterno]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[ApellidoMaterno]"
-                      name="ApellidoMaterno"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Sexo]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Sexo]"
-                      length="2"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Sexo]"
-                      name="Sexo"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Direccion]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Direccion]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Direccion]"
-                      name="Direccion"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[FechaNacimiento]"
-                      dataType="dbDate"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[FechaNacimiento]"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[FechaNacimiento]"
-                      name="FechaNacimiento"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Telefono]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Telefono]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Telefono]"
-                      name="Telefono"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Celular]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Celular]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Celular]"
-                      name="Celular"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Email]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Email]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Email]"
-                      name="Email"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[PuntosAcumulados]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[anyo]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[PuntosAcumulados]"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[PuntosAcumulados]"
-                      name="PuntosAcumulados"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[anyo]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[anyo]"
+                      name="anyo"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[PuntosDisponibles]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[PuntosDisponibles]"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[PuntosDisponibles]"
-                      name="PuntosDisponibles"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[IdCompra]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[IdCompra]"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[IdCompra]"
-                      name="IdCompra"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Distrito]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[cmes]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Distrito]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Distrito]"
-                      name="Distrito"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[cmes]"
+                      length="30"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[cmes]"
+                      name="cmes"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Ciudad]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nmes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[nmes]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nmes]"
+                      name="nmes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nsemana]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[nsemana]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[nsemana]"
+                      name="nsemana"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[dsemana]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Ciudad]"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].Columns[Ciudad]"
-                      name="Ciudad"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[dsemana]"
+                      length="30"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[dsemana]"
+                      name="dsemana"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[bimestre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[bimestre]"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[bimestre]"
+                      name="bimestre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[trimestre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[trimestre]"
+                      length="11"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[trimestre]"
+                      name="trimestre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[semestre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[semestre]"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].Columns[semestre]"
+                      name="semestre"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[idCliente]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[idtiempo]"
                       dataType="i4"
-                      name="idCliente" />
+                      name="idtiempo" />
                     <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Contraseña]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[fecha]"
                       dataType="wstr"
-                      length="255"
-                      name="Contraseña" />
+                      length="10"
+                      name="fecha" />
                     <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Nombres]"
-                      dataType="wstr"
-                      length="255"
-                      name="Nombres" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[ApellidoPaterno]"
-                      dataType="wstr"
-                      length="255"
-                      name="ApellidoPaterno" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[ApellidoMaterno]"
-                      dataType="wstr"
-                      length="255"
-                      name="ApellidoMaterno" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Sexo]"
-                      dataType="wstr"
-                      length="2"
-                      name="Sexo" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Direccion]"
-                      dataType="wstr"
-                      length="255"
-                      name="Direccion" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[FechaNacimiento]"
-                      dataType="dbDate"
-                      name="FechaNacimiento" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Telefono]"
-                      dataType="wstr"
-                      length="255"
-                      name="Telefono" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Celular]"
-                      dataType="wstr"
-                      length="255"
-                      name="Celular" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Email]"
-                      dataType="wstr"
-                      length="255"
-                      name="Email" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[PuntosAcumulados]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[anyo]"
                       dataType="i4"
-                      name="PuntosAcumulados" />
+                      name="anyo" />
                     <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[PuntosDisponibles]"
-                      dataType="i4"
-                      name="PuntosDisponibles" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[IdCompra]"
-                      dataType="i4"
-                      name="IdCompra" />
-                    <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Distrito]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[cmes]"
                       dataType="wstr"
-                      length="255"
-                      name="Distrito" />
+                      length="30"
+                      name="cmes" />
                     <externalMetadataColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de origen de ADO NET].ExternalColumns[Ciudad]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[nmes]"
+                      dataType="i4"
+                      name="nmes" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[nsemana]"
+                      dataType="i4"
+                      name="nsemana" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[dsemana]"
                       dataType="wstr"
-                      length="255"
-                      name="Ciudad" />
+                      length="30"
+                      name="dsemana" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[bimestre]"
+                      dataType="wstr"
+                      length="10"
+                      name="bimestre" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[trimestre]"
+                      dataType="wstr"
+                      length="11"
+                      name="trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET].ExternalColumns[semestre]"
+                      dataType="wstr"
+                      length="10"
+                      name="semestre" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET]"
+                  refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET]"
                   isErrorOut="true"
                   name="Salida de error de origen de ADO NET">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[idCliente]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[idtiempo]"
                       dataType="i4"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[idCliente]"
-                      name="idCliente" />
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[idtiempo]"
+                      name="idtiempo" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Contraseña]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[fecha]"
                       dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Contraseña]"
-                      name="Contraseña" />
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[fecha]"
+                      name="fecha" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Nombres]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Nombres]"
-                      name="Nombres" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ApellidoPaterno]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ApellidoPaterno]"
-                      name="ApellidoPaterno" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ApellidoMaterno]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ApellidoMaterno]"
-                      name="ApellidoMaterno" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Sexo]"
-                      dataType="wstr"
-                      length="2"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Sexo]"
-                      name="Sexo" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Direccion]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Direccion]"
-                      name="Direccion" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[FechaNacimiento]"
-                      dataType="dbDate"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[FechaNacimiento]"
-                      name="FechaNacimiento" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Telefono]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Telefono]"
-                      name="Telefono" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Celular]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Celular]"
-                      name="Celular" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Email]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Email]"
-                      name="Email" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[PuntosAcumulados]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[anyo]"
                       dataType="i4"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[PuntosAcumulados]"
-                      name="PuntosAcumulados" />
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[anyo]"
+                      name="anyo" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[PuntosDisponibles]"
-                      dataType="i4"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[PuntosDisponibles]"
-                      name="PuntosDisponibles" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[IdCompra]"
-                      dataType="i4"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[IdCompra]"
-                      name="IdCompra" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Distrito]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[cmes]"
                       dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Distrito]"
-                      name="Distrito" />
+                      length="30"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[cmes]"
+                      name="cmes" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Ciudad]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[Ciudad]"
-                      name="Ciudad" />
-                    <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[nmes]"
                       dataType="i4"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[nmes]"
+                      name="nmes" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[nsemana]"
+                      dataType="i4"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[nsemana]"
+                      name="nsemana" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[dsemana]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[dsemana]"
+                      name="dsemana" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[bimestre]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[bimestre]"
+                      name="bimestre" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[trimestre]"
+                      dataType="wstr"
+                      length="11"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[trimestre]"
+                      name="trimestre" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[semestre]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[semestre]"
+                      name="semestre" />
+                    <outputColumn
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      refId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\LOAD DIM_TIEMPO\Tabla Clientes.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      lineageId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2659,6 +3085,18 @@ where [refTable].[nombre] = ?</property>
               </outputs>
             </component>
           </components>
+          <paths>
+            <path
+              refId="Package\LOAD DIM_TIEMPO.Paths[Salida de conversión de datos]"
+              endId="Package\LOAD DIM_TIEMPO\TIME_DESTINO.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de conversión de datos"
+              startId="Package\LOAD DIM_TIEMPO\Conversión de datos.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\LOAD DIM_TIEMPO.Paths[Salida de origen de ADO NET]"
+              endId="Package\LOAD DIM_TIEMPO\Conversión de datos.Inputs[Entrada de conversión de datos]"
+              name="Salida de origen de ADO NET"
+              startId="Package\LOAD DIM_TIEMPO\TIME_ORIGEN.Outputs[Salida de origen de ADO NET]" />
+          </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -2843,21 +3281,29 @@ where [refTable].[nombre] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="180.8,41.6"
-          Id="Package\LOAD DIM_CLIENTES"
-          TopLeft="113.571428813192,292.627450723893" />
+          Size="237.6,41.6"
+          Id="Package\CARGA DE LOCALES CINEPLANET"
+          TopLeft="144.404762212162,35.4313725179625" />
+        <NodeLayout
+          Size="234.4,41.6"
+          Id="Package\CARGA DE SALAS CINEPLANET 1"
+          TopLeft="475.714286726957,36.3235293799257" />
         <NodeLayout
           Size="180.8,41.6"
           Id="Package\LIMPIEZA DE TABLAS DE DATAMART"
           TopLeft="330.238095941086,160.205882212514" />
         <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\LOAD DIM_TIEMPO"
-          TopLeft="340.238095962373,290.588235039406" />
+          Size="180.8,41.6"
+          Id="Package\LOAD DIM_CLIENTES"
+          TopLeft="113.571428813192,292.627450723893" />
         <NodeLayout
           Size="180,41.6"
           Id="Package\LOAD DIM_PELICULA"
           TopLeft="581.666667904882,295.686274250623" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\LOAD DIM_TIEMPO"
+          TopLeft="340.238095962373,290.588235039406" />
         <NodeLayout
           Size="210.4,41.6"
           Id="Package\LOAD FACT_TABLE VENTAS"
@@ -3042,14 +3488,6 @@ where [refTable].[nombre] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="237.6,41.6"
-          Id="Package\CARGA DE LOCALES CINEPLANET"
-          TopLeft="144.404762212162,35.4313725179625" />
-        <NodeLayout
-          Size="234.4,41.6"
-          Id="Package\CARGA DE SALAS CINEPLANET 1"
-          TopLeft="475.714286726957,36.3235293799257" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 6]"
           TopLeft="263.204762212162,77.0313725179625">
@@ -3122,80 +3560,6 @@ where [refTable].[nombre] = ?</property>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\LOAD DIM_CLIENTES">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="168,41.6"
-          Id="Package\LOAD DIM_CLIENTES\Destino de OLE DB"
-          TopLeft="275.714286301209,335.705882058682" />
-        <NodeLayout
-          Size="163.2,41.6"
-          Id="Package\LOAD DIM_CLIENTES\Origen de OLE DB"
-          TopLeft="275.000000585403,204.176470409267" />
-        <EdgeLayout
-          Id="Package\LOAD DIM_CLIENTES.Paths[Salida de origen de OLE DB]"
-          TopLeft="358.157143443306,245.776470409267">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,89.9294116494151"
-              Start="0,0"
-              End="0,82.4294116494151">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,82.4294116494151" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\LOAD DIM_TIEMPO">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="144,41.6"
-          Id="Package\LOAD DIM_TIEMPO\Tabla Clientes"
-          TopLeft="229.071429047353,78.9117646415341" />
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\LOAD DIM_PELICULA">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="144,41.6"
-          Id="Package\LOAD DIM_PELICULA\Tabla Clientes"
-          TopLeft="229.071429047353,78.9117646415341" />
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\LOAD FACT_TABLE VENTAS">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="163.2,41.6"
-          Id="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB"
-          TopLeft="363.999994575977,72.9999989122153" />
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
     design-time-name="Package\CARGA DE LOCALES CINEPLANET">
     <LayoutInfo>
       <GraphLayout
@@ -3262,12 +3626,20 @@ where [refTable].[nombre] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\CARGA DE LOCALES CINEPLANET\Destino de ADO NET">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\CARGA DE LOCALES CINEPLANET\Búsqueda">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -3277,16 +3649,8 @@ where [refTable].[nombre] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\CARGA DE LOCALES CINEPLANET\Destino de ADO NET">
-    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -3358,6 +3722,44 @@ where [refTable].[nombre] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <TaskHost
+    design-time-name="Package\LOAD DIM_CLIENTES">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\LOAD DIM_CLIENTES\Destino de OLE DB"
+          TopLeft="275.714286301209,335.705882058682" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\LOAD DIM_CLIENTES\Origen de OLE DB"
+          TopLeft="275.000000585403,204.176470409267" />
+        <EdgeLayout
+          Id="Package\LOAD DIM_CLIENTES.Paths[Salida de origen de OLE DB]"
+          TopLeft="358.157143443306,245.776470409267">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,89.9294116494151"
+              Start="0,0"
+              End="0,82.4294116494151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,82.4294116494151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\LOAD DIM_CLIENTES\Destino de OLE DB">
     <Properties>
@@ -3384,5 +3786,114 @@ where [refTable].[nombre] = ?</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\LOAD DIM_PELICULA">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\LOAD DIM_PELICULA\Tabla Clientes"
+          TopLeft="229.071429047353,78.9117646415341" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\LOAD DIM_TIEMPO">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\LOAD DIM_TIEMPO\TIME_ORIGEN"
+          TopLeft="229.071429047353,78.9117646415341" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\LOAD DIM_TIEMPO\TIME_DESTINO"
+          TopLeft="220.714286184129,337.999999703729" />
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\LOAD DIM_TIEMPO\Conversión de datos"
+          TopLeft="214.285714741872,211.058823344411" />
+        <EdgeLayout
+          Id="Package\LOAD DIM_TIEMPO.Paths[Salida de origen de ADO NET]"
+          TopLeft="302.078571894613,120.511764641534">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90.5470587028765"
+              Start="0,0"
+              End="0,83.0470587028765">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,83.0470587028765" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\LOAD DIM_TIEMPO.Paths[Salida de conversión de datos]"
+          TopLeft="299.300000463,252.658823344411">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,85.3411763593187"
+              Start="0,0"
+              End="0,77.8411763593187">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,77.8411763593187" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD DIM_TIEMPO\TIME_DESTINO">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD DIM_TIEMPO\TIME_ORIGEN">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\LOAD FACT_TABLE VENTAS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB"
+          TopLeft="363.999994575977,72.9999989122153" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
