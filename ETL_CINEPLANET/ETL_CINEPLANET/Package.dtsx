@@ -11,8 +11,8 @@
   DTS:LocaleID="22538"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="46"
-  DTS:VersionGUID="{052C74C9-54AD-4F98-AC78-4E9A387CE92C}">
+  DTS:VersionBuild="47"
+  DTS:VersionGUID="{99E0A2E8-FC8D-4708-BEB2-82ED3CC64BD3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3299,7 +3299,7 @@ from T_Venta</property>
         <NodeLayout
           Size="180,41.6"
           Id="Package\LOAD DIM_PELICULA"
-          TopLeft="581.666667904882,295.686274250623" />
+          TopLeft="575.238096462626,285.745097788749" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\LOAD DIM_TIEMPO"
@@ -3370,26 +3370,26 @@ from T_Venta</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="207.828571963797,93.8803920381089"
+              EndConnector="201.40000052154,83.9392155762345"
               Start="0,0"
-              End="207.828571963797,86.3803920381089">
+              End="201.40000052154,76.4392155762345">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.2031577340025" />
+                    End="0,24.7931030174293" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28.2031577340025"
-                    Point2="0,32.2031577340025"
-                    Point3="4,32.2031577340025" />
+                    Point1="0,24.7931030174293"
+                    Point2="0,28.7931030174293"
+                    Point3="4,28.7931030174293" />
                   <mssgle:LineSegment
-                    End="203.828571963797,32.2031577340025" />
+                    End="197.40000052154,28.7931030174293" />
                   <mssgle:CubicBezierSegment
-                    Point1="203.828571963797,32.2031577340025"
-                    Point2="207.828571963797,32.2031577340025"
-                    Point3="207.828571963797,36.2031577340025" />
+                    Point1="197.40000052154,28.7931030174293"
+                    Point2="201.40000052154,28.7931030174293"
+                    Point3="201.40000052154,32.7931030174293" />
                   <mssgle:LineSegment
-                    End="207.828571963797,86.3803920381089" />
+                    End="201.40000052154,76.4392155762345" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3456,30 +3456,30 @@ from T_Venta</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 5]"
-          TopLeft="671.666667904882,337.286274250623">
+          TopLeft="665.238096462626,327.345097788749">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-187.771429111215,145.752941012248"
+              EndConnector="-181.342857668959,155.694117474123"
               Start="0,0"
-              End="-187.771429111215,138.252941012248">
+              End="-181.342857668959,148.194117474123">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,91.9524993397279" />
+                    End="0,98.4970034936032" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,91.9524993397279"
-                    Point2="0,95.9524993397279"
-                    Point3="-4,95.9524993397279" />
+                    Point1="0,98.4970034936032"
+                    Point2="0,102.497003493603"
+                    Point3="-4,102.497003493603" />
                   <mssgle:LineSegment
-                    End="-183.771429111215,95.9524993397279" />
+                    End="-177.342857668959,102.497003493603" />
                   <mssgle:CubicBezierSegment
-                    Point1="-183.771429111215,95.9524993397279"
-                    Point2="-187.771429111215,95.9524993397279"
-                    Point3="-187.771429111215,99.9524993397279" />
+                    Point1="-177.342857668959,102.497003493603"
+                    Point2="-181.342857668959,102.497003493603"
+                    Point3="-181.342857668959,106.497003493603" />
                   <mssgle:LineSegment
-                    End="-187.771429111215,138.252941012248" />
+                    End="-181.342857668959,148.194117474123" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3569,35 +3569,13 @@ from T_Venta</property>
           Id="Package\CARGA DE LOCALES CINEPLANET\Origen de archivo plano"
           TopLeft="249.045450916345,281.590904976834" />
         <NodeLayout
-          Size="124,41.6"
-          Id="Package\CARGA DE LOCALES CINEPLANET\Búsqueda"
-          TopLeft="287.727268439802,383.663634711639" />
-        <EdgeLayout
-          Id="Package\CARGA DE LOCALES CINEPLANET.Paths[Salida de origen de archivo plano]"
-          TopLeft="346.986359678074,323.190904976834">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.4727297348055"
-              Start="0,0"
-              End="0,52.9727297348055">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.9727297348055" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
           Size="176,41.6"
           Id="Package\CARGA DE LOCALES CINEPLANET\Destino de ADO NET"
           TopLeft="262.90908699144,522.636355848475" />
+        <NodeLayout
+          Size="124,41.6"
+          Id="Package\CARGA DE LOCALES CINEPLANET\Búsqueda"
+          TopLeft="287.727268439802,383.663634711639" />
         <EdgeLayout
           Id="Package\CARGA DE LOCALES CINEPLANET.Paths[Salida de entradas no coincidentes de búsqueda]"
           TopLeft="350.318177715621,425.263634711639">
@@ -3619,6 +3597,30 @@ from T_Venta</property>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
               BoundingBox="-106.8890234375,38.8387043184178,213.778046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA DE LOCALES CINEPLANET.Paths[Salida de origen de archivo plano]"
+          TopLeft="346.986359678074,323.190904976834">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.4727297348055"
+              Start="0,0"
+              End="0,52.9727297348055">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.9727297348055" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -3662,13 +3664,13 @@ from T_Venta</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="176,41.6"
-          Id="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET"
-          TopLeft="551.999991774559,488.999992713332" />
-        <NodeLayout
           Size="190.4,41.6"
           Id="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano"
           TopLeft="544.499991968274,272.49999602139" />
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET"
+          TopLeft="551.999991774559,488.999992713332" />
         <NodeLayout
           Size="124,41.6"
           Id="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda"
@@ -3692,7 +3694,9 @@ from T_Venta</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3728,13 +3732,13 @@ from T_Venta</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="168,41.6"
-          Id="Package\LOAD DIM_CLIENTES\Destino de OLE DB"
-          TopLeft="275.714286301209,335.705882058682" />
-        <NodeLayout
           Size="163.2,41.6"
           Id="Package\LOAD DIM_CLIENTES\Origen de OLE DB"
           TopLeft="275.000000585403,204.176470409267" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\LOAD DIM_CLIENTES\Destino de OLE DB"
+          TopLeft="275.714286301209,335.705882058682" />
         <EdgeLayout
           Id="Package\LOAD DIM_CLIENTES.Paths[Salida de origen de OLE DB]"
           TopLeft="358.157143443306,245.776470409267">
