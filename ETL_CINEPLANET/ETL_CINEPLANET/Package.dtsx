@@ -11,8 +11,8 @@
   DTS:LocaleID="22538"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="57"
-  DTS:VersionGUID="{3F8DE7EA-1B01-4AA1-9335-4617908C4652}">
+  DTS:VersionBuild="64"
+  DTS:VersionGUID="{4D8805A0-BA1E-422C-83C8-31A9054C3F23}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -114,6 +114,53 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Data Source=.;Initial Catalog=GestionCine;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[salas cineplanet txt]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B0664B7F-80D3-4D81-9CB1-8B1A59C9C85E}"
+      DTS:ObjectName="salas cineplanet txt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="22538"
+          DTS:HeaderRowDelimiter="_x007C_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\dev\Inteligencia de negocio\DM_CINEPLANET\Salas_cineplanet.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="descripcion"
+              DTS:DTSID="{E204954A-668A-4BCA-9B4C-EF495DBD370B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="capacidad"
+              DTS:DTSID="{FEE06C0F-2976-4953-848F-3C8EC07875D1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdLocal"
+              DTS:DTSID="{0E76CED6-5A40-4666-9C6B-37E549F709F3}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -640,13 +687,13 @@ where [refTable].[nombre] = ?</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\CARGA DE SALAS CINEPLANET 1"
+      DTS:refId="Package\CARGA DE SALAS CINEPLANET"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Tarea Flujo de datos"
       DTS:DTSID="{8d7cfb47-dc78-49f6-96fa-51902854776d}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="CARGA DE SALAS CINEPLANET 1"
+      DTS:ObjectName="CARGA DE SALAS CINEPLANET"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -654,7 +701,7 @@ where [refTable].[nombre] = ?</property>
           version="1">
           <components>
             <component
-              refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda"
+              refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda"
               componentClassID="Microsoft.Lookup"
               contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
               description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
@@ -667,13 +714,14 @@ where [refTable].[nombre] = ?</property>
                   description="Especifica la instrucción SQL que genera la tabla de búsqueda."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from T_Local</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select descripcion from T_Sala</property>
                 <property
                   dataType="System.String"
                   description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select descripcion from T_Sala) [refTable]
+where [refTable].[descripcion] = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica el tipo de conexión utilizado para tener acceso al conjunto de datos de referencia."
@@ -704,12 +752,12 @@ where [refTable].[nombre] = ?</property>
                 <property
                   dataType="System.String"
                   description="Indica si se debe hacer referencia a metadatos en formato XML."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="idLocal" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombre" dataType="DT_STR" length="200" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="direccion" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="ciudad" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="provincia" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="telefono" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="administrador" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="estado" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="descripcion" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
                   description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
-                  name="ParameterMap"></property>
+                  name="ParameterMap">#{Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[descripcion]};</property>
                 <property
                   dataType="System.Int32"
                   description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
@@ -721,7 +769,7 @@ where [refTable].[nombre] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Connections[OleDbConnection]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LocalHost.GestionCine]"
                   connectionManagerRefId="Package.ConnectionManagers[LocalHost.GestionCine]"
                   description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
@@ -729,110 +777,65 @@ where [refTable].[nombre] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Inputs[Entrada de búsqueda]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Inputs[Entrada de búsqueda]"
                   name="Entrada de búsqueda">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Inputs[Entrada de búsqueda].Columns[descripcion]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="descripcion"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[descripcion]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia con la que se combina una columna."
+                          name="JoinToReferenceColumn">descripcion</property>
+                        <property
+                          dataType="System.Null"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda]"
                   errorOrTruncationOperation="Búsqueda"
                   exclusionGroup="1"
                   name="Salida de entradas coincidentes de búsqueda"
-                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Inputs[Entrada de búsqueda]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[direccion]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Copiar columna"
-                      length="255"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[direccion]"
-                      name="direccion"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
-                          name="CopyFromReferenceColumn">direccion</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[provincia]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Copiar columna"
-                      length="255"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[provincia]"
-                      name="provincia"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
-                          name="CopyFromReferenceColumn">provincia</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ciudad]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copiar columna"
-                      length="255"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ciudad]"
-                      name="ciudad"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
-                          name="CopyFromReferenceColumn">ciudad</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[nombre]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Copiar columna"
-                      length="200"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda].Columns[nombre]"
-                      name="nombre"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
-                          name="CopyFromReferenceColumn">nombre</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
+                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Inputs[Entrada de búsqueda]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de entradas no coincidentes de búsqueda]"
                   description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
                   exclusionGroup="1"
                   name="Salida de entradas no coincidentes de búsqueda"
-                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Inputs[Entrada de búsqueda]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de error de búsqueda]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de error de búsqueda]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de búsqueda"
-                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Inputs[Entrada de búsqueda]">
+                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Inputs[Entrada de búsqueda]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -841,148 +844,147 @@ where [refTable].[nombre] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET"
-              componentClassID="Microsoft.ManagedComponentHost"
-              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
-              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
-              name="Destino de ADO NET"
+              refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
               usesDispositions="true"
-              version="2">
+              version="4">
               <properties>
                 <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
                   dataType="System.String"
-                  description="Nombre de la tabla de la base de datos de destino."
-                  expressionType="Notify"
-                  name="TableOrViewName"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."T_Local"</property>
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[T_Sala]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
-                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
-                  expressionType="Notify"
-                  name="BatchSize">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
-                  expressionType="Notify"
-                  name="CommandTimeout">30</property>
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
                 <property
                   dataType="System.Boolean"
-                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
-                  expressionType="Notify"
-                  name="UseBulkInsertWhenPossible">true</property>
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
                 <property
                   dataType="System.String"
-                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.GestionCine.sa]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.GestionCine.sa]"
-                  description="Administrador de conexiones administrado"
-                  name="IDbConnection" />
+                  refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.GestionCine]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.GestionCine]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
-                  name="Entrada de destino de ADO NET">
+                  name="Entrada de destino de OLE DB">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[Nombre]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[descripcion]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Nombre"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Nombre]" />
+                      cachedName="descripcion"
+                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[descripcion]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[descripcion]" />
                     <inputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[Direccion]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[capacidad]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Direccion"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[direccion]"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Direccion]" />
+                      cachedName="capacidad"
+                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[capacidad]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[capacidad]" />
                     <inputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[Ciudad]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[IdLocal]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
-                      cachedName="Ciudad"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[ciudad]"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Ciudad]" />
-                    <inputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].Columns[Provincia_unmapped]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="Provincia_unmapped"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[provincia]"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\129:invalid" />
+                      cachedName="IdLocal"
+                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idLocal]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[IdLocal]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[idLocal]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idSala]"
                       dataType="i4"
-                      name="idLocal" />
+                      name="idSala" />
                     <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
-                      dataType="wstr"
-                      length="200"
-                      name="nombre" />
-                    <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[direccion]"
-                      dataType="wstr"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[descripcion]"
+                      codePage="1252"
+                      dataType="str"
                       length="255"
-                      name="direccion" />
+                      name="descripcion" />
                     <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[ciudad]"
-                      dataType="wstr"
-                      length="255"
-                      name="ciudad" />
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[capacidad]"
+                      dataType="i4"
+                      name="capacidad" />
                     <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[provincia]"
-                      dataType="wstr"
-                      length="255"
-                      name="provincia" />
-                    <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[telefono]"
-                      dataType="wstr"
-                      length="255"
-                      name="telefono" />
-                    <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[administrador]"
-                      dataType="wstr"
-                      length="255"
-                      name="administrador" />
-                    <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET].ExternalColumns[estado]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[estado]"
                       dataType="bool"
                       name="estado" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idLocal]"
+                      dataType="i4"
+                      name="idLocal" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
                   exclusionGroup="1"
                   isErrorOut="true"
-                  name="Salida de error de destino de ADO NET"
-                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]">
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -991,7 +993,7 @@ where [refTable].[nombre] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano"
+              refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano"
               componentClassID="Microsoft.FlatFileSource"
               contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
               description="Origen de archivo plano"
@@ -1011,26 +1013,26 @@ where [refTable].[nombre] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Administrador de conexiones de archivos planos]"
-                  connectionManagerRefId="Package.ConnectionManagers[Administrador de conexiones de archivos planos]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[salas cineplanet txt]"
+                  connectionManagerRefId="Package.ConnectionManagers[salas cineplanet txt]"
                   name="FlatFileConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano]"
                   name="Salida de origen de archivo plano">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Codigo]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[descripcion]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Codigo]"
+                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[descripcion]"
                       length="50"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Codigo]"
-                      name="Codigo"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[descripcion]"
+                      name="descripcion"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -1044,15 +1046,15 @@ where [refTable].[nombre] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Nombre]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[capacidad]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Nombre]"
+                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[capacidad]"
                       length="50"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Nombre]"
-                      name="Nombre"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[capacidad]"
+                      name="capacidad"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -1066,59 +1068,15 @@ where [refTable].[nombre] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Direccion]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[IdLocal]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Direccion]"
+                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[IdLocal]"
                       length="50"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Direccion]"
-                      name="Direccion"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indica si los datos están en formato binario."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Ciudad]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Ciudad]"
-                      length="50"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Ciudad]"
-                      name="Ciudad"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indica si los datos están en formato binario."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Provincia ]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Provincia ]"
-                      length="50"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[Provincia ]"
-                      name="Provincia "
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].Columns[IdLocal]"
+                      name="IdLocal"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -1135,59 +1093,47 @@ where [refTable].[nombre] = ?</property>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Codigo]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[descripcion]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      name="Codigo" />
+                      name="descripcion" />
                     <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Nombre]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[capacidad]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      name="Nombre" />
+                      name="capacidad" />
                     <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Direccion]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[IdLocal]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      name="Direccion" />
-                    <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Ciudad]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Ciudad" />
-                    <externalMetadataColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano].ExternalColumns[Provincia ]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Provincia " />
+                      name="IdLocal" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano]"
+                  refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano]"
                   isErrorOut="true"
                   name="Salida de error de origen de archivo plano">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
                       codePage="1252"
                       dataType="text"
                       description="Columna de salida de error de origen de archivo plano"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
                       name="Columna de salida de error de origen de archivo plano" />
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      refId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      lineageId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1198,15 +1144,15 @@ where [refTable].[nombre] = ?</property>
           </components>
           <paths>
             <path
-              refId="Package\CARGA DE SALAS CINEPLANET 1.Paths[Salida de entradas no coincidentes de búsqueda]"
-              endId="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET.Inputs[Entrada de destino de ADO NET]"
+              refId="Package\CARGA DE SALAS CINEPLANET.Paths[Salida de entradas no coincidentes de búsqueda]"
+              endId="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
               name="Salida de entradas no coincidentes de búsqueda"
-              startId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Outputs[Salida de entradas no coincidentes de búsqueda]" />
+              startId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Outputs[Salida de entradas no coincidentes de búsqueda]" />
             <path
-              refId="Package\CARGA DE SALAS CINEPLANET 1.Paths[Salida de origen de archivo plano]"
-              endId="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda.Inputs[Entrada de búsqueda]"
+              refId="Package\CARGA DE SALAS CINEPLANET.Paths[Salida de origen de archivo plano]"
+              endId="Package\CARGA DE SALAS CINEPLANET\Búsqueda.Inputs[Entrada de búsqueda]"
               name="Salida de origen de archivo plano"
-              startId="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano.Outputs[Salida de origen de archivo plano]" />
+              startId="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano.Outputs[Salida de origen de archivo plano]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2213,7 +2159,8 @@ DNI
                       name="IdSala" />
                     <externalMetadataColumn
                       refId="Package\LOAD DIM_SALA\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Descripcion]"
-                      dataType="wstr"
+                      codePage="1252"
+                      dataType="str"
                       length="255"
                       name="Descripcion" />
                     <externalMetadataColumn
@@ -3317,6 +3264,173 @@ from T_Venta</property>
           version="1">
           <components>
             <component
+              refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[hventa]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.DM_Cine.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.DM_Cine.sa]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[IdCliente]"
+                      cachedDataType="i4"
+                      cachedName="IdCliente"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idcliente]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdCliente]" />
+                    <inputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[idtiempo]"
+                      cachedDataType="i4"
+                      cachedName="idtiempo"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idtiempo]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idtiempo]" />
+                    <inputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[IdPelicula]"
+                      cachedDataType="i4"
+                      cachedName="IdPelicula"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idpelicula]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdPelicula]" />
+                    <inputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[mventa]"
+                      cachedDataType="r8"
+                      cachedName="mventa"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[mventa]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[mventa]" />
+                    <inputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[cantidad]"
+                      cachedDataType="i4"
+                      cachedName="cantidad"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[cantidad]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[cantidad]" />
+                    <inputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[descto]"
+                      cachedDataType="i4"
+                      cachedName="descto"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[descto]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descto]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idcliente]"
+                      dataType="i4"
+                      name="idcliente" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idpelicula]"
+                      dataType="i4"
+                      name="idpelicula" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idtiempo]"
+                      dataType="i4"
+                      name="idtiempo" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[mventa]"
+                      dataType="numeric"
+                      name="mventa"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[cantidad]"
+                      dataType="i2"
+                      name="cantidad" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[descto]"
+                      dataType="numeric"
+                      name="descto"
+                      precision="18"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
@@ -3341,7 +3455,26 @@ from T_Venta</property>
                   dataType="System.String"
                   description="Comando SQL para ejecutar."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select dc.IdCliente, dt.idtiempo, dp.IdPelicula, ds.IdSala,
+   (vc.cantidad +c.precioVenta ) as TotalCombos , (ve.cantidad * ti.precioNormal) as TotalEntradas,
+   (vc.cantidad +c.precioVenta +ve.cantidad * ti.precioNormal) as mventa,
+   ve.cantidad as cantidad,
+   0 as descto
+  from T_Venta v
+  left join T_VentaEntrada ve on v.idVentaEntrada = ve.idVentaEntrada
+  left join T_TipoEntrada ti on ve.idTipoEntrada = ti.idTipoEntrada
+  left join T_VentaCombo vc on vc.idVentaCombo = v.idVentaCombo
+  left join T_Cliente cli on cli.idCliente = v.idCliente
+  inner join DM_Cine.dbo.dimcliente dc on dc.DNI = cli.DNI
+  left join T_Funcion f on v.idFuncion = f.idFuncion
+  left join T_Pelicula p on p.idPelicula = f.idPelicula
+  inner join DM_Cine.dbo.dimpelicula dp on dp.Titulo = p.Titulo
+  inner join DM_Cine.dbo.dimtiempo as dt on Convert(date,v.Fecha) = dt.fecha
+  left join T_Sala s on f.idSala = s.idSala 
+  inner join DM_Cine.dbo.dimsala ds on ds.Descripcion = s.descripcion
+  left join T_Cartelera cart on f.idCartelera = cart.idCartelera
+  left join T_Genero g on g.idGenero = p.idGenero 
+  left join T_Combo c on c.idCombo = vc.idCombo</property>
                 <property
                   dataType="System.String"
                   description="Variable que contiene el comando SQL para ejecutar."
@@ -3358,7 +3491,7 @@ from T_Venta</property>
                   dataType="System.Int32"
                   description="Especifica el modo utilizado para obtener acceso a la base de datos."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="Asignaciones entre los parámetros del comando SQL y las variables."
@@ -3367,6 +3500,8 @@ from T_Venta</property>
               <connections>
                 <connection
                   refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.GestionCine]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.GestionCine]"
                   description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
                   name="OleDbConnection" />
               </connections>
@@ -3374,14 +3509,179 @@ from T_Venta</property>
                 <output
                   refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
                   name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdCliente]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[IdCliente]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdCliente]"
+                      name="IdCliente"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idtiempo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idtiempo]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idtiempo]"
+                      name="idtiempo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdPelicula]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[IdPelicula]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdPelicula]"
+                      name="IdPelicula"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdSala]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[IdSala]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdSala]"
+                      name="IdSala"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TotalCombos]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TotalCombos]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TotalCombos]"
+                      name="TotalCombos"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TotalEntradas]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TotalEntradas]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[TotalEntradas]"
+                      name="TotalEntradas"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[mventa]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[mventa]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[mventa]"
+                      name="mventa"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[cantidad]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[cantidad]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[cantidad]"
+                      name="cantidad"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descto]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[descto]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descto]"
+                      name="descto"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
                   <externalMetadataColumns
-                    isUsed="True" />
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[IdCliente]"
+                      dataType="i4"
+                      name="IdCliente" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idtiempo]"
+                      dataType="i4"
+                      name="idtiempo" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[IdPelicula]"
+                      dataType="i4"
+                      name="IdPelicula" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[IdSala]"
+                      dataType="i4"
+                      name="IdSala" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TotalCombos]"
+                      dataType="r8"
+                      name="TotalCombos" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[TotalEntradas]"
+                      dataType="r8"
+                      name="TotalEntradas" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[mventa]"
+                      dataType="r8"
+                      name="mventa" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[cantidad]"
+                      dataType="i4"
+                      name="cantidad" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[descto]"
+                      dataType="i4"
+                      name="descto" />
+                  </externalMetadataColumns>
                 </output>
                 <output
                   refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
                   isErrorOut="true"
                   name="Salida de error de origen de OLE DB">
                   <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[IdCliente]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[IdCliente]"
+                      name="IdCliente" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idtiempo]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idtiempo]"
+                      name="idtiempo" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[IdPelicula]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[IdPelicula]"
+                      name="IdPelicula" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[IdSala]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[IdSala]"
+                      name="IdSala" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TotalCombos]"
+                      dataType="r8"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TotalCombos]"
+                      name="TotalCombos" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TotalEntradas]"
+                      dataType="r8"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[TotalEntradas]"
+                      name="TotalEntradas" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[mventa]"
+                      dataType="r8"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[mventa]"
+                      name="mventa" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[cantidad]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[cantidad]"
+                      name="cantidad" />
+                    <outputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[descto]"
+                      dataType="i4"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[descto]"
+                      name="descto" />
                     <outputColumn
                       refId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
                       dataType="i4"
@@ -3400,6 +3700,13 @@ from T_Venta</property>
               </outputs>
             </component>
           </components>
+          <paths>
+            <path
+              refId="Package\LOAD FACT_TABLE VENTAS.Paths[Salida de origen de OLE DB]"
+              endId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de origen de OLE DB"
+              startId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+          </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3465,7 +3772,7 @@ from T_Venta</property>
       DTS:refId="Package.PrecedenceConstraints[Restricción 7]"
       DTS:CreationName=""
       DTS:DTSID="{AA2CBB2D-F192-4C6C-B8EB-ADABB1C155E9}"
-      DTS:From="Package\CARGA DE SALAS CINEPLANET 1"
+      DTS:From="Package\CARGA DE SALAS CINEPLANET"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 7"
       DTS:To="Package\LIMPIEZA DE TABLAS DE DATAMART" />
@@ -3501,15 +3808,15 @@ from T_Venta</property>
         <NodeLayout
           Size="237.6,41.6"
           Id="Package\CARGA DE LOCALES CINEPLANET"
-          TopLeft="144.404762212162,35.4313725179625" />
+          TopLeft="127.440476461764,42.1225489826857" />
         <NodeLayout
-          Size="234.4,41.6"
-          Id="Package\CARGA DE SALAS CINEPLANET 1"
-          TopLeft="475.714286726957,36.3235293799257" />
+          Size="224.8,41.6"
+          Id="Package\CARGA DE SALAS CINEPLANET"
+          TopLeft="512.321429662027,36.3235293799257" />
         <NodeLayout
           Size="180.8,41.6"
           Id="Package\LIMPIEZA DE TABLAS DE DATAMART"
-          TopLeft="361.488096007609,155.426470451997" />
+          TopLeft="355.238095994304,140.132352818344" />
         <NodeLayout
           Size="180.8,41.6"
           Id="Package\LOAD DIM_CLIENTES"
@@ -3528,30 +3835,30 @@ from T_Venta</property>
           TopLeft="365.595238873495,491.642156431801" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="400.048096007609,197.026470451997">
+          TopLeft="393.798095994304,181.732352818344">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-239.826667287549,93.6892155676889"
+              EndConnector="-233.576667274245,108.983333201342"
               Start="0,0"
-              End="-239.826667287549,86.1892155676889">
+              End="-233.576667274245,101.483333201342">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.0137728930683" />
+                    End="0,28.5868279175228" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,24.0137728930683"
-                    Point2="0,28.0137728930683"
-                    Point3="-4,28.0137728930683" />
+                    Point1="0,28.5868279175228"
+                    Point2="0,32.5868279175228"
+                    Point3="-4,32.5868279175228" />
                   <mssgle:LineSegment
-                    End="-235.826667287549,28.0137728930683" />
+                    End="-229.576667274245,32.5868279175228" />
                   <mssgle:CubicBezierSegment
-                    Point1="-235.826667287549,28.0137728930683"
-                    Point2="-239.826667287549,28.0137728930683"
-                    Point3="-239.826667287549,32.0137728930683" />
+                    Point1="-229.576667274245,32.5868279175228"
+                    Point2="-233.576667274245,32.5868279175228"
+                    Point3="-233.576667274245,36.5868279175228" />
                   <mssgle:LineSegment
-                    End="-239.826667287549,86.1892155676889" />
+                    End="-233.576667274245,101.483333201342" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3562,30 +3869,30 @@ from T_Venta</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="434.608096007609,197.026470451997">
+          TopLeft="428.358095994304,181.732352818344">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-75.7342859020713,89.7382351789954"
+              EndConnector="-69.4842858887666,105.032352812648"
               Start="0,0"
-              End="-75.7342859020713,82.2382351789954">
+              End="-69.4842858887666,97.5323528126483">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.1275670027406" />
+                    End="0,42.9665217567322" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,36.1275670027406"
-                    Point2="0,40.1275670027406"
-                    Point3="-4,40.1275670027406" />
+                    Point1="0,42.9665217567322"
+                    Point2="0,46.9665217567322"
+                    Point3="-4,46.9665217567322" />
                   <mssgle:LineSegment
-                    End="-71.7342859020713,40.1275670027406" />
+                    End="-65.4842858887666,46.9665217567322" />
                   <mssgle:CubicBezierSegment
-                    Point1="-71.7342859020713,40.1275670027406"
-                    Point2="-75.7342859020713,40.1275670027406"
-                    Point3="-75.7342859020713,44.1275670027406" />
+                    Point1="-65.4842858887666,46.9665217567322"
+                    Point2="-69.4842858887666,46.9665217567322"
+                    Point3="-69.4842858887666,50.9665217567322" />
                   <mssgle:LineSegment
-                    End="-75.7342859020713,82.2382351789954" />
+                    End="-69.4842858887666,97.5323528126483" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3596,30 +3903,30 @@ from T_Venta</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 2]"
-          TopLeft="469.168096007609,197.026470451997">
+          TopLeft="462.918095994304,181.732352818344">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="91.6057145183541,94.4539214493714"
+              EndConnector="97.8557145316587,109.748039083024"
               Start="0,0"
-              End="91.6057145183541,86.9539214493714">
+              End="97.8557145316587,102.248039083024">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.2362447185545" />
+                    End="0,45.0751994725461" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,38.2362447185545"
-                    Point2="0,42.2362447185545"
-                    Point3="4,42.2362447185545" />
+                    Point1="0,45.0751994725461"
+                    Point2="0,49.0751994725461"
+                    Point3="4,49.0751994725461" />
                   <mssgle:LineSegment
-                    End="87.6057145183541,42.2362447185545" />
+                    End="93.8557145316587,49.0751994725461" />
                   <mssgle:CubicBezierSegment
-                    Point1="87.6057145183541,42.2362447185545"
-                    Point2="91.6057145183541,42.2362447185545"
-                    Point3="91.6057145183541,46.2362447185545" />
+                    Point1="93.8557145316587,49.0751994725461"
+                    Point2="97.8557145316587,49.0751994725461"
+                    Point3="97.8557145316587,53.0751994725461" />
                   <mssgle:LineSegment
-                    End="91.6057145183541,86.9539214493714" />
+                    End="97.8557145316587,102.248039083024" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3732,30 +4039,30 @@ from T_Venta</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 6]"
-          TopLeft="263.204762212162,77.0313725179625">
+          TopLeft="246.240476461764,83.7225489826857">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="159.883333795447,78.395097934035"
+              EndConnector="170.597619532541,56.4098038356588"
               Start="0,0"
-              End="159.883333795447,70.895097934035">
+              End="170.597619532541,48.9098038356588">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.6244529818208" />
+                    End="0,29.5489885969971" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,42.6244529818208"
-                    Point2="0,46.6244529818208"
-                    Point3="4,46.6244529818208" />
+                    Point1="0,29.5489885969971"
+                    Point2="0,33.5489885969971"
+                    Point3="4,33.5489885969971" />
                   <mssgle:LineSegment
-                    End="155.883333795447,46.6244529818208" />
+                    End="166.597619532541,33.5489885969971" />
                   <mssgle:CubicBezierSegment
-                    Point1="155.883333795447,46.6244529818208"
-                    Point2="159.883333795447,46.6244529818208"
-                    Point3="159.883333795447,50.6244529818208" />
+                    Point1="166.597619532541,33.5489885969971"
+                    Point2="170.597619532541,33.5489885969971"
+                    Point3="170.597619532541,37.5489885969971" />
                   <mssgle:LineSegment
-                    End="159.883333795447,70.895097934035" />
+                    End="170.597619532541,48.9098038356588" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3766,30 +4073,30 @@ from T_Venta</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 7]"
-          TopLeft="592.914286726957,77.9235293799257">
+          TopLeft="624.721429662027,77.9235293799257">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-112.226190719348,77.5029410720718"
+              EndConnector="-150.283333667722,62.2088234384188"
               Start="0,0"
-              End="-112.226190719348,70.0029410720718">
+              End="-150.283333667722,54.7088234384188">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.0938544270743" />
+                    End="0,32.9978792028491" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,42.0938544270743"
-                    Point2="0,46.0938544270743"
-                    Point3="-4,46.0938544270743" />
+                    Point1="0,32.9978792028491"
+                    Point2="0,36.9978792028491"
+                    Point3="-4,36.9978792028491" />
                   <mssgle:LineSegment
-                    End="-108.226190719348,46.0938544270743" />
+                    End="-146.283333667722,36.9978792028491" />
                   <mssgle:CubicBezierSegment
-                    Point1="-108.226190719348,46.0938544270743"
-                    Point2="-112.226190719348,46.0938544270743"
-                    Point3="-112.226190719348,50.0938544270743" />
+                    Point1="-146.283333667722,36.9978792028491"
+                    Point2="-150.283333667722,36.9978792028491"
+                    Point3="-150.283333667722,40.9978792028491" />
                   <mssgle:LineSegment
-                    End="-112.226190719348,70.0029410720718" />
+                    End="-150.283333667722,54.7088234384188" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3804,30 +4111,30 @@ from T_Venta</property>
           TopLeft="677.678572871171,287.926470377931" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 8]"
-          TopLeft="503.728096007609,197.026470451997">
+          TopLeft="497.478095994304,181.732352818344">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="252.750476863562,90.8999999259331"
+              EndConnector="259.000476876867,106.194117559586"
               Start="0,0"
-              End="252.750476863562,83.3999999259331">
+              End="259.000476876867,98.694117559586">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.1797766527914" />
+                    End="0,27.7528316772459" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,23.1797766527914"
-                    Point2="0,27.1797766527914"
-                    Point3="4,27.1797766527914" />
+                    Point1="0,27.7528316772459"
+                    Point2="0,31.7528316772459"
+                    Point3="4,31.7528316772459" />
                   <mssgle:LineSegment
-                    End="248.750476863562,27.1797766527914" />
+                    End="255.000476876867,31.7528316772459" />
                   <mssgle:CubicBezierSegment
-                    Point1="248.750476863562,27.1797766527914"
-                    Point2="252.750476863562,27.1797766527914"
-                    Point3="252.750476863562,31.1797766527914" />
+                    Point1="255.000476876867,31.7528316772459"
+                    Point2="259.000476876867,31.7528316772459"
+                    Point3="259.000476876867,35.7528316772459" />
                   <mssgle:LineSegment
-                    End="252.750476863562,83.3999999259331" />
+                    End="259.000476876867,98.694117559586" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3933,9 +4240,7 @@ from T_Venta</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3973,67 +4278,65 @@ from T_Venta</property>
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\CARGA DE SALAS CINEPLANET 1">
+    design-time-name="Package\CARGA DE SALAS CINEPLANET">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="190.4,41.6"
-          Id="Package\CARGA DE SALAS CINEPLANET 1\Origen de archivo plano"
-          TopLeft="544.499991968274,272.49999602139" />
+          Id="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano"
+          TopLeft="500.499992623925,173.499997496605" />
         <NodeLayout
-          Size="176,41.6"
-          Id="Package\CARGA DE SALAS CINEPLANET 1\Destino de ADO NET"
-          TopLeft="551.999991774559,488.999992713332" />
+          Size="168,41.6"
+          Id="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB"
+          TopLeft="513.999992340803,413.999993830919" />
         <NodeLayout
           Size="124,41.6"
-          Id="Package\CARGA DE SALAS CINEPLANET 1\Búsqueda"
-          TopLeft="574.999991431833,377.299998442829" />
+          Id="Package\CARGA DE SALAS CINEPLANET\Búsqueda"
+          TopLeft="534.999992027879,293.399996557832" />
         <EdgeLayout
-          Id="Package\CARGA DE SALAS CINEPLANET 1.Paths[Salida de origen de archivo plano]"
-          TopLeft="638.349991700054,314.09999602139">
+          Id="Package\CARGA DE SALAS CINEPLANET.Paths[Salida de origen de archivo plano]"
+          TopLeft="596.349992325902,215.099997496605">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,63.2000024214386"
+              EndConnector="0,78.2999990612268"
               Start="0,0"
-              End="0,55.7000024214386">
+              End="0,70.7999990612268">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,55.7000024214386" />
+                    End="0,70.7999990612268" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\CARGA DE SALAS CINEPLANET 1.Paths[Salida de entradas no coincidentes de búsqueda]"
-          TopLeft="638.499991603196,418.899998442829">
+          Id="Package\CARGA DE SALAS CINEPLANET.Paths[Salida de entradas no coincidentes de búsqueda]"
+          TopLeft="597.499992184341,334.999996557832">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,70.0999942705036"
+              EndConnector="0,78.9999972730874"
               Start="0,0"
-              End="0,62.5999942705036">
+              End="0,71.4999972730874">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,62.5999942705036" />
+                    End="0,71.4999972730874" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-115.57701171875,23.2999971352518,231.1540234375,16"
+              BoundingBox="-106.8890234375,29.6523423865437,213.778046875,12.1953125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -4243,14 +4546,48 @@ from T_Venta</property>
     design-time-name="Package\LOAD FACT_TABLE VENTAS">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB"
           TopLeft="363.999994575977,72.9999989122153" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB"
+          TopLeft="364.999994561076,242.999996379018" />
+        <EdgeLayout
+          Id="Package\LOAD FACT_TABLE VENTAS.Paths[Salida de origen de OLE DB]"
+          TopLeft="447.299994568527,114.599998912215">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,128.399997466803"
+              Start="0,0"
+              End="0,120.899997466803">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,120.899997466803" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\LOAD DIM_PELICULA\Destino de OLE DB">
     <Properties>
@@ -4325,6 +4662,55 @@ from T_Venta</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA DE SALAS CINEPLANET\Búsqueda">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
