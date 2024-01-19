@@ -11,8 +11,8 @@
   DTS:LocaleID="22538"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="64"
-  DTS:VersionGUID="{4D8805A0-BA1E-422C-83C8-31A9054C3F23}">
+  DTS:VersionBuild="69"
+  DTS:VersionGUID="{DE8CB8DD-F45C-4775-858E-23EFF79878A9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2150,6 +2150,14 @@ DNI
                       cachedName="estado"
                       externalMetadataColumnId="Package\LOAD DIM_SALA\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[estado]"
                       lineageId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[estado]" />
+                    <inputColumn
+                      refId="Package\LOAD DIM_SALA\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[nombreLocal]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="nombreLocal"
+                      externalMetadataColumnId="Package\LOAD DIM_SALA\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[nombreLocal]"
+                      lineageId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[nombreLocal]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2171,6 +2179,12 @@ DNI
                       refId="Package\LOAD DIM_SALA\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[estado]"
                       dataType="i4"
                       name="estado" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD DIM_SALA\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[nombreLocal]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="nombreLocal" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2224,7 +2238,13 @@ DNI
                   dataType="System.String"
                   description="Comando SQL para ejecutar."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TOP (1000) [idSala]
+      ,[descripcion]
+      ,[capacidad]
+      ,s.[estado]
+      ,l.nombre as nombreLocal
+  FROM [GestionCine].[dbo].[T_Sala] s 
+  inner join T_Local l on s.idLocal = l.idLocal</property>
                 <property
                   dataType="System.String"
                   description="Variable que contiene el comando SQL para ejecutar."
@@ -2241,7 +2261,7 @@ DNI
                   dataType="System.Int32"
                   description="Especifica el modo utilizado para obtener acceso a la base de datos."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="Asignaciones entre los parámetros del comando SQL y las variables."
@@ -2299,13 +2319,15 @@ DNI
                       name="estado"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idLocal]"
-                      dataType="i4"
+                      refId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[nombreLocal]"
+                      codePage="1252"
+                      dataType="str"
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idLocal]"
-                      lineageId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idLocal]"
-                      name="idLocal"
+                      externalMetadataColumnId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[nombreLocal]"
+                      length="200"
+                      lineageId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[nombreLocal]"
+                      name="nombreLocal"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
@@ -2329,9 +2351,11 @@ DNI
                       dataType="bool"
                       name="estado" />
                     <externalMetadataColumn
-                      refId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idLocal]"
-                      dataType="i4"
-                      name="idLocal" />
+                      refId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[nombreLocal]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="nombreLocal" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -2362,10 +2386,12 @@ DNI
                       lineageId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[estado]"
                       name="estado" />
                     <outputColumn
-                      refId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idLocal]"
-                      dataType="i4"
-                      lineageId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idLocal]"
-                      name="idLocal" />
+                      refId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[nombreLocal]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[nombreLocal]"
+                      name="nombreLocal" />
                     <outputColumn
                       refId="Package\LOAD DIM_SALA\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
                       dataType="i4"
@@ -3371,6 +3397,12 @@ from T_Venta</property>
                       cachedName="descto"
                       externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[descto]"
                       lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descto]" />
+                    <inputColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[IdSala]"
+                      cachedDataType="i4"
+                      cachedName="IdSala"
+                      externalMetadataColumnId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idsala]"
+                      lineageId="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[IdSala]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3402,6 +3434,10 @@ from T_Venta</property>
                       name="descto"
                       precision="18"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idsala]"
+                      dataType="i4"
+                      name="idsala" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3826,6 +3862,10 @@ from T_Venta</property>
           Id="Package\LOAD DIM_PELICULA"
           TopLeft="470.773810525963,291.480391901369" />
         <NodeLayout
+          Size="157.6,41.6"
+          Id="Package\LOAD DIM_SALA"
+          TopLeft="676.785715726413,290.794117434241" />
+        <NodeLayout
           Size="171.2,41.6"
           Id="Package\LOAD DIM_TIEMPO"
           TopLeft="273.273810105538,286.764705630993" />
@@ -4105,36 +4145,32 @@ from T_Venta</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="157.6,41.6"
-          Id="Package\LOAD DIM_SALA"
-          TopLeft="677.678572871171,287.926470377931" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 8]"
           TopLeft="497.478095994304,181.732352818344">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="259.000476876867,106.194117559586"
+              EndConnector="258.107619732109,109.061764615897"
               Start="0,0"
-              End="259.000476876867,98.694117559586">
+              End="258.107619732109,101.561764615897">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.7528316772459" />
+                    End="0,28.6102794943314" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27.7528316772459"
-                    Point2="0,31.7528316772459"
-                    Point3="4,31.7528316772459" />
+                    Point1="0,28.6102794943314"
+                    Point2="0,32.6102794943314"
+                    Point3="4,32.6102794943314" />
                   <mssgle:LineSegment
-                    End="255.000476876867,31.7528316772459" />
+                    End="254.107619732109,32.6102794943314" />
                   <mssgle:CubicBezierSegment
-                    Point1="255.000476876867,31.7528316772459"
-                    Point2="259.000476876867,31.7528316772459"
-                    Point3="259.000476876867,35.7528316772459" />
+                    Point1="254.107619732109,32.6102794943314"
+                    Point2="258.107619732109,32.6102794943314"
+                    Point3="258.107619732109,36.6102794943314" />
                   <mssgle:LineSegment
-                    End="259.000476876867,98.694117559586" />
+                    End="258.107619732109,101.561764615897" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4145,30 +4181,30 @@ from T_Venta</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 9]"
-          TopLeft="756.478572871171,329.526470377931">
+          TopLeft="755.585715726413,332.394117434241">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-224.963333997677,162.115686053871"
+              EndConnector="-224.070476852918,159.24803899756"
               Start="0,0"
-              End="-224.963333997677,154.615686053871">
+              End="-224.070476852918,151.74803899756">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,109.940206927226" />
+                    End="0,107.924730775944" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,109.940206927226"
-                    Point2="0,113.940206927226"
-                    Point3="-4,113.940206927226" />
+                    Point1="0,107.924730775944"
+                    Point2="0,111.924730775944"
+                    Point3="-4,111.924730775944" />
                   <mssgle:LineSegment
-                    End="-220.963333997677,113.940206927226" />
+                    End="-220.070476852918,111.924730775944" />
                   <mssgle:CubicBezierSegment
-                    Point1="-220.963333997677,113.940206927226"
-                    Point2="-224.963333997677,113.940206927226"
-                    Point3="-224.963333997677,117.940206927226" />
+                    Point1="-220.070476852918,111.924730775944"
+                    Point2="-224.070476852918,111.924730775944"
+                    Point3="-224.070476852918,115.924730775944" />
                   <mssgle:LineSegment
-                    End="-224.963333997677,154.615686053871" />
+                    End="-224.070476852918,151.74803899756" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4240,7 +4276,9 @@ from T_Venta</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -4283,10 +4321,6 @@ from T_Venta</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="190.4,41.6"
-          Id="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano"
-          TopLeft="500.499992623925,173.499997496605" />
-        <NodeLayout
           Size="168,41.6"
           Id="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB"
           TopLeft="513.999992340803,413.999993830919" />
@@ -4294,6 +4328,10 @@ from T_Venta</property>
           Size="124,41.6"
           Id="Package\CARGA DE SALAS CINEPLANET\Búsqueda"
           TopLeft="534.999992027879,293.399996557832" />
+        <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\CARGA DE SALAS CINEPLANET\Origen de archivo plano"
+          TopLeft="500.499992623925,173.499997496605" />
         <EdgeLayout
           Id="Package\CARGA DE SALAS CINEPLANET.Paths[Salida de origen de archivo plano]"
           TopLeft="596.349992325902,215.099997496605">
@@ -4313,7 +4351,9 @@ from T_Venta</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4343,11 +4383,47 @@ from T_Venta</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA DE SALAS CINEPLANET\Búsqueda">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\LOAD DIM_CLIENTES">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\LOAD DIM_CLIENTES\Origen de OLE DB"
@@ -4375,7 +4451,9 @@ from T_Venta</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -4411,15 +4489,15 @@ from T_Venta</property>
     design-time-name="Package\LOAD DIM_PELICULA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="144,41.6"
-          Id="Package\LOAD DIM_PELICULA\Tabla Clientes"
-          TopLeft="376.225273008436,60.1425341519867" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="168,41.6"
           Id="Package\LOAD DIM_PELICULA\Destino de OLE DB"
           TopLeft="364.615379182192,235.384611877111" />
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\LOAD DIM_PELICULA\Tabla Clientes"
+          TopLeft="376.225273008436,60.1425341519867" />
         <EdgeLayout
           Id="Package\LOAD DIM_PELICULA.Paths[Salida de origen de ADO NET]"
           TopLeft="448.420326095314,101.742534151987">
@@ -4439,6 +4517,67 @@ from T_Venta</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD DIM_PELICULA\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD DIM_PELICULA\Tabla Clientes">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\LOAD DIM_SALA">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\LOAD DIM_SALA\Origen de OLE DB"
+          TopLeft="383.999994277954,95.9999985694886" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\LOAD DIM_SALA\Destino de OLE DB"
+          TopLeft="378.999994352459,357.999994665384" />
+        <EdgeLayout
+          Id="Package\LOAD DIM_SALA.Paths[Salida de origen de OLE DB]"
+          TopLeft="464.299994315207,137.599998569489">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,220.399996095895"
+              Start="0,0"
+              End="0,212.899996095895">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,212.899996095895" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -4446,10 +4585,28 @@ from T_Venta</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\LOAD DIM_PELICULA\Tabla Clientes">
+    design-time-name="Package\LOAD DIM_SALA\Destino de OLE DB">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD DIM_SALA\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -4581,91 +4738,6 @@ from T_Venta</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\LOAD DIM_PELICULA\Destino de OLE DB">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\LOAD DIM_SALA">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="163.2,41.6"
-          Id="Package\LOAD DIM_SALA\Origen de OLE DB"
-          TopLeft="383.999994277954,95.9999985694886" />
-        <NodeLayout
-          Size="168,41.6"
-          Id="Package\LOAD DIM_SALA\Destino de OLE DB"
-          TopLeft="381.999994307756,282.999995782971" />
-        <EdgeLayout
-          Id="Package\LOAD DIM_SALA.Paths[Salida de origen de OLE DB]"
-          TopLeft="465.799994292855,137.599998569489">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,145.399997213483"
-              Start="0,0"
-              End="0,137.899997213483">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,137.899997213483" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\LOAD DIM_SALA\Origen de OLE DB">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\LOAD DIM_SALA\Destino de OLE DB">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\LOAD FACT_TABLE VENTAS\Destino de OLE DB">
     <Properties>
       <Property>
@@ -4679,36 +4751,8 @@ from T_Venta</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\CARGA DE SALAS CINEPLANET\Destino de OLE DB">
+    design-time-name="Package\LOAD FACT_TABLE VENTAS\Origen de OLE DB">
     <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\CARGA DE SALAS CINEPLANET\Búsqueda">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
